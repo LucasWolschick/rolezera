@@ -1,0 +1,18 @@
+:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  
+  --mild-fg: #777777;
+
+  --disabled-bg: #e1e1e5;
+  --occluded-bg: #000055;
+
+  --neutral-fg: #000077;
+  --neutral-bg: #fafaff;
+
+  --green-fg: #007700;
+  --green-bg: #f0fff0;
+
+  --danger-fg: #770000;
+  --danger-bg: #fff0f0;
+}

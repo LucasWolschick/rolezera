@@ -1,0 +1,7 @@
+<div class="home container">
+  <h1>Olá, <%= Current.user.name %></h1>
+
+  <p>Você no momento não está com nenhum rolê ativo.</p>
+
+  <%= button_to "Sair", auth_path, method: :delete, class: "button--danger button" %>
+</div>
