@@ -21,7 +21,7 @@ class SignUpController < ApplicationController
     )
 
     if @user.save
-      start_new_session_for user
+      start_new_session_for @user
       clear_pending_oidc
 
       redirect_to after_authentication_url

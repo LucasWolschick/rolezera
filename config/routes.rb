@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "landing_page#index"
 
   # login/signup flow
-  get "/auth", to: "auth#index"
+  post "/auth", to: "auth#create"
   delete "/auth", to: "auth#destroy"
   resources :sign_up, path: "/signup", only: [ :index, :create ]
 
