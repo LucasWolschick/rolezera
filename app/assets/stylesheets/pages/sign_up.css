@@ -1,0 +1,21 @@
+.sign-up {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  gap: 24px;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-up form {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+  gap: 24px;
+}

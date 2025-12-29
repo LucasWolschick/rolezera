@@ -1,18 +1,24 @@
-<h1>Rolezera</h1>
+<div class="landing container">
+    <div class="landing__copy">
+        <h1 class="app-logo">Rolêzera</h1>
 
-<p>Marque rolês com seus amigos</p>
+        <p>Marque rolês com seus amigos</p>
+    </div>
 
-<script src="https://accounts.google.com/gsi/client" async></script>
-<div id="g_id_onload"
-    data-client_id=<%= Rails.application.credentials.gcp.oauth_client_id %>
-    data-login_uri=<%= auth_url.sub("127.0.0.1", "localhost") %>
-    data-auto_prompt="false">
-</div>
-<div class="g_id_signin"
-    data-type="standard"
-    data-size="large"
-    data-theme="outline"
-    data-text="sign_in_with"
-    data-shape="rectangular"
-    data-logo_alignment="left">
+    <div class="landing__sso">
+        <script src="https://accounts.google.com/gsi/client" async></script>
+        <div id="g_id_onload"
+            data-client_id=<%= Rails.application.credentials.gcp.oauth_client_id %>
+            data-login_uri=<%= auth_url.sub("127.0.0.1", "localhost") %>
+            data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+            data-type="standard"
+            data-size="large"
+            data-theme="outline"
+            data-text="sign_in_with"
+            data-shape="rectangular"
+            data-logo_alignment="left">
+        </div>
+    </div>
 </div>

@@ -1,0 +1,36 @@
+:root {
+  --base-size: 18px;
+}
+
+html {
+  font-family: 'Cabin';
+  font-size: var(--base-size);
+  color: var(--fg);
+
+  line-height: 1.5;
+}
+
+h2 {
+  font-size: calc(4rem / 3);
+  font-weight: bold;
+}
+
+h1 {
+  font-size: calc(16rem / 9);
+  font-weight: bold;
+}
+
+small {
+  font-size: calc(7rem / 9);
+  color: var(--mild-fg);
+}
+
+.app-logo {
+  font-family: 'Galindo';
+  line-height: 82%;
+  font-size: calc(8rem / 3);
+  text-transform: uppercase;
+  max-width: 4ch;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
