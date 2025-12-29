@@ -1,6 +1,7 @@
 class AuthController < ApplicationController
-  skip_before_action :require_login
-  before_action :redirect_if_logged_in
+  include OidcSession
+
+  unauthenticated_access_only except: [ :destroy ]
 
   def index
     # todo: actually get data from google
@@ -10,18 +11,16 @@ class AuthController < ApplicationController
     user = User.find_by(google_sub: sub)
 
     if user
-      # user authenticated
-      session[:user_id] = user.id
-
-      redirect_to home_path
+      start_new_session_for user
+      redirect_to after_authentication_url
     else
-      # load google data
-      session[:pending_oidc] = {
-        "sub" => sub,
-        "email" => email
-      }
-
+      set_pending_oidc sub: sub, email: email
       redirect_to sign_up_index_path
     end
+  end
+
+  def destroy
+    terminate_session
+    redirect_to root_path, status: :see_other
   end
 end

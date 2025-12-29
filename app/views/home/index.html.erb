@@ -1,3 +1,5 @@
-<h1>Olá, USUÁRIO</h1>
+<h1>Olá, <%= Current.user.name %></h1>
 
 <p>Você no momento não está com nenhum rolê ativo.</p>
+
+<%= button_to "Sair", auth_path, method: :delete %>
