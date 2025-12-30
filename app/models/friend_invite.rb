@@ -3,14 +3,19 @@ class FriendInvite < ApplicationRecord
 
   validates :token, presence: true
 
+  scope :active, -> { where("expires_at > ?", Time.current) }
+
   def self.resolve(token)
-    FriendInvite
+    active
       .where(token: token)
-      .where("expires_at > ?", Time.current)
       .first
   end
 
-  def self.create_for(inviter, expires_in = 15.minutes)
+  def self.get_or_create_for(inviter, expires_in = 15.minutes)
+    if invite = active.where(inviter: inviter).first
+      return invite
+    end
+
     expiry = Time.current + expires_in
 
     begin
