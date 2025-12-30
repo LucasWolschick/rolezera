@@ -12,4 +12,27 @@ class User < ApplicationRecord
   end
   normalizes :email, with: ->(value) { value.strip.downcase }
   normalizes :name, with: ->(value) { value.strip }
+
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
+
+  def friends
+    super.readonly
+  end
+
+  def add_friend(other)
+    return if other.id == id
+
+    transaction do
+      friendships.create!(friend: other)
+      other.friendships.create!(friend: self)
+    end
+  end
+
+  def remove_friend(other)
+    transaction do
+      friendships.where(friend: other).delete_all
+      other.friendships.where(friend: self).delete_all
+    end
+  end
 end
