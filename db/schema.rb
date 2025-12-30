@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_28_234523) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_30_192500) do
+  create_table "friendships", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "friend_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
+    t.index ["user_id"], name: "index_friendships_on_user_id"
+    t.check_constraint "user_id != friend_id", name: "friendships_no_self_friends"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -23,6 +34,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_234523) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", null: false
+    t.integer "friends_count", default: 0, null: false
     t.string "google_sub", null: false
     t.string "name"
     t.string "phone"
@@ -31,5 +43,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_234523) do
     t.index ["google_sub"], name: "index_users_on_google_sub", unique: true
   end
 
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "sessions", "users"
 end
