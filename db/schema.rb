@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_30_192500) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_30_201717) do
+  create_table "friend_invites", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "expires_at", null: false
+    t.integer "inviter_id", null: false
+    t.string "token", null: false
+    t.index ["expires_at"], name: "index_friend_invites_on_expires_at"
+    t.index ["inviter_id"], name: "index_friend_invites_on_inviter_id"
+    t.index ["token"], name: "index_friend_invites_on_token", unique: true
+  end
+
   create_table "friendships", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "friend_id", null: false
@@ -43,6 +53,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_30_192500) do
     t.index ["google_sub"], name: "index_users_on_google_sub", unique: true
   end
 
+  add_foreign_key "friend_invites", "users", column: "inviter_id"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "sessions", "users"
