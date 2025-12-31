@@ -12,5 +12,9 @@
 }
 
 .vertical--fill {
-  height: 100%;
+  min-height: 100%;
+}
+
+.spacer {
+  flex-grow: 1;
 }

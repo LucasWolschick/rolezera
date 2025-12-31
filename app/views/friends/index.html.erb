@@ -1,0 +1,11 @@
+<main class="vertical container vertical--fill" style="max-height: fit-content;">
+  <%= link_to "Voltar", home_path %>
+
+  <h1>Amigos</h1>
+
+  <small>Você tem <%= pluralize(Current.user.friends_count, "amigo adicionado", plural: "amigos adicionados") %>.</small>
+
+  <%= render "friend_list", friends: @friends %>
+
+  <%= link_to "Adicionar amigos", friends_add_path, class: "button" %>
+</main>
