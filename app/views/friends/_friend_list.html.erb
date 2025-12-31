@@ -1,5 +1,12 @@
 <ul class="friend-list">
-<% @friends.each do |friend| %>
-  <li><%= friend.name %></li>
+<% @friends.sort_by(&:name).each do |friend| %>
+  <li>
+    <%= link_to friend_path(friend), data: {
+      turbo_frame: "bottom_sheet",
+      action: "click->sheet#open"
+    } do %>
+      <%= friend.name %>
+    <% end %>
+  </li>
 <% end %>
 </ul>

@@ -7,4 +7,8 @@ module FriendsHelper
       standalone: true
     )
   end
+
+  def whatsapp_link_for_user(user)
+    "https://wa.me/#{user.phone}"
+  end
 end
