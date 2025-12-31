@@ -1,0 +1,21 @@
+.friends-scan-code-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.friends-scan-code {
+  padding-bottom: 32px;
+}
+
+.friends-scan-code__camera {
+  flex-grow: 1;
+  height: 100%;
+
+  & video {
+    height: 100%;
+    padding: 0px;
+    object-fit: cover;
+    display: block;
+  }
+}

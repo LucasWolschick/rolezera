@@ -1,0 +1,13 @@
+.qr-code {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+}

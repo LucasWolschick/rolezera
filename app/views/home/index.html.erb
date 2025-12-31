@@ -3,5 +3,9 @@
 
   <p>Você no momento não está com nenhum rolê ativo.</p>
 
+  <%= link_to "Amigos#{Current.user.friends_count > 0 ? " (#{Current.user.friends_count})" : ""}", friends_add_path %>
+
+  <%= link_to "Adicionar amigo", friends_add_path, class: "button" %>
+
   <%= button_to "Sair", auth_path, method: :delete, class: "button--danger button" %>
 </div>

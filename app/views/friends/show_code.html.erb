@@ -1,0 +1,22 @@
+<main class="vertical container">
+  <%= link_to "Voltar", friends_add_path %>
+
+  <h1>Mostre seu QR code</h1>
+
+  <p>Mostre o seu QR code abaixo para que seus amigos possam lhe adicionar.</p>
+
+  <div class="qr-code">
+    <%= image_tag friends_code_qr_path(@invite.token), id: "qr-code" %>
+  </div>
+
+  <%= render "user_signature", user: Current.user %>
+</main>
+
+<script type="module">
+  function refreshQrCode() {
+    const qrImage = document.getElementById('qr-code');
+    qrImage.src = `/friends/code/qr.svg?ts=${Date.now()}`;
+  }
+
+  setInterval(refreshQrCode, 15 * 60 * 1000);
+</script>
