@@ -1,0 +1,33 @@
+<main class="friend-invites-show vertical vertical--center vertical--fill container">
+  <%= link_to "Voltar", friends_scan_path, style: "align-self: start" %>
+
+  <% if @user != Current.user && @user != nil && !Current.user.friends.include?(@user) %>
+    <h1>Confirme a amizade</h1>
+
+    <p>Quer adicionar essa pessoa aos seus amigos?</p>
+
+    <div class="signature-container">
+      <%= render "/friends/user_signature", user: @user, style: "flex: 1" %>
+    </div>
+
+    <%= button_to "Adicionar", friend_invite_path(@invite.token), class: "button", form_class: "center-contents" %>
+  <% elsif @user == Current.user %>
+    <h1>Convite inválido</h1>
+
+    <p>Você não pode adicionar a si mesmo como amigo.</p>
+  <% elsif Current.user.friends.include?(@user) %>
+    <h1>Vocês já são amigos</h1>
+
+    <p>Você já é amigo dessa pessoa.</p>
+
+    <div class="signature-container">
+      <%= render "/friends/user_signature", user: @user, friends_since: Current.user.friendships.where(friend: @user).first.created_at, style: "flex: 1" %>
+    </div>
+  <% else %>
+    <h1>Convite inválido</h1>
+
+    <p>Não foi encontrado um usuário para esse QR code.</p>
+  <% end %>
+  
+  <%= link_to "Cancelar", friends_add_path, style: "text-align: center; align-self: center" %>
+</main>

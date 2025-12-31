@@ -11,6 +11,6 @@
   max-height: 100%;
 }
 
-.vertical--center {
-  justify-content: center;
+.vertical--fill {
+  height: 100%;
 }

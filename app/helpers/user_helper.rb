@@ -1,5 +1,5 @@
 module UserHelper
   def format_phone(phone)
-    Phonelib.parse(phone).international
+    Phonelib.parse(phone).national
   end
 end
