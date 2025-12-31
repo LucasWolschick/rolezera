@@ -1,1 +1,46 @@
-<h1>Scan code</h1>
+<div class="friends-scan-code-container">
+  <main class="friends-scan-code vertical container">
+    <%= link_to "Voltar", friends_add_path %>
+
+    <h1>Adicione um amigo</h1>
+
+    <p>Escaneeie o QR code da outra pessoa para adicioná-la como amiga.</p>
+
+    <small>Você vai precisar dar permissão de acesso à câmera.</small>
+  </main>
+  <div class="friends-scan-code__camera">
+    <video id="camera" class="container">
+      Loading camera...
+    </video>
+  </div>
+</div>
+
+<script type="module">
+  import QrScanner from "qr-scanner";
+
+  const element = document.querySelector("#camera");
+  const scanner = new QrScanner(
+    element,
+    result => {
+      const url = new URL(result.data);
+      const appOrigin = window.location.origin;
+
+      console.log(url);
+
+      if (url.origin !== appOrigin) return;
+
+      if (!url.pathname.startsWith("/friends/invites/")) return;
+
+      window.location.href = url.toString();
+    },
+    { }
+  );
+  scanner.setInversionMode("both");
+  scanner.start();
+
+  document.addEventListener('turbo:before-cache', () => {
+    if (scanner) {
+      scanner.destroy();
+    }
+  });
+</script>
