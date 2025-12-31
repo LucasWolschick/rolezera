@@ -3,7 +3,7 @@
 
   <p>Você no momento não está com nenhum rolê ativo.</p>
 
-  <%= link_to "Amigos#{Current.user.friends_count > 0 ? " (#{Current.user.friends_count})" : ""}", friends_path %>
+  <%= link_to "Amigos#{Current.user.friends_count > 0 ? " (#{Current.user.friends_count})" : ""}", friends_path, class: "anchor" %>
 
   <%= link_to "Adicionar amigo", friends_add_path, class: "button" %>
 

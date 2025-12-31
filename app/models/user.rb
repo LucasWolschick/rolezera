@@ -31,8 +31,8 @@ class User < ApplicationRecord
 
   def remove_friend(other)
     transaction do
-      friendships.where(friend: other).delete_all
-      other.friendships.where(friend: self).delete_all
+      friendships.where(friend: other).destroy_all
+      other.friendships.where(friend: self).destroy_all
     end
   end
 end
