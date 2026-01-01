@@ -28,9 +28,5 @@
     <%= yield %>
 
     <%= render "shared/bottom_sheet" %>
-
-    <% if Current.user&.push_subscriptions&.none? %>
-      <button id="enable-push">Enable notifications</button>
-    <% end %>
   </body>
 </html>
