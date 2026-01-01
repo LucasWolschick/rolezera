@@ -7,3 +7,14 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+[
+  [ "bike", "🚲 Bicicletar" ],
+  [ "movies", "🎥 Cinemar" ],
+  [ "drink", "🍻 Beber" ],
+  [ "eat", "🍕 Comer" ],
+  [ "buy", "🛍️ Comprar" ],
+  [ "other", "Qualquer coisa" ]
+].each do |key, topic|
+  EventTopic.find_or_create_by!(key: key, description: topic)
+end
