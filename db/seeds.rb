@@ -9,12 +9,12 @@
 #   end
 
 [
-  [ "bike", "🚲 Bicicletar" ],
-  [ "movies", "🎥 Cinemar" ],
-  [ "drink", "🍻 Beber" ],
-  [ "eat", "🍕 Comer" ],
-  [ "buy", "🛍️ Comprar" ],
-  [ "other", "Qualquer coisa" ]
-].each do |key, topic|
-  EventTopic.find_or_create_by!(key: key, description: topic)
+  [ "bike", "🚲 Bicicletar", "%{user_name} quer dar uma bicicletada. Quer ir junto?" ],
+  [ "movies", "🎥 Cinemar", "%{user_name} quer ir ver um filme. Quer ir junto?" ],
+  [ "drink", "🍻 Beber", "%{user_name} quer beber. Quer beber junto?" ],
+  [ "eat", "🍕 Comer", "%{user_name} estava pensando em sair para comer algo. Quer ir junto?" ],
+  [ "buy", "🛍️ Comprar", "%{user_name} quer ir fazer compras. Quer ir junto?" ],
+  [ "other", "Qualquer coisa", "%{user_name} quer dar um rolê. Quer ir junto?" ]
+].each do |key, topic, prompt|
+  EventTopic.find_or_create_by!(key: key, description: topic, prompt: prompt)
 end

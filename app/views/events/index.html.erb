@@ -1,0 +1,22 @@
+<main class="vertical container">
+  <%= link_to "Voltar", home_path, class: "anchor" %>
+
+  <h1>Chamar rolê</h1>
+
+  <p>Que tipo de rolê você está a fim?</p>
+
+  <%= form_with url: "/events/confirm", model: @event, data: { turbo_frame: "bottom_sheet" }, class: "vertical center-contents" do |form| %>
+    <ul class="radio-list">
+      <% @topics.each do |topic| %>
+        <li>
+          <label class="radio-button">
+            <%= form.radio_button :event_topic, topic.key, class: "hidden-radio" %>
+            <span><%= topic.description %></span>
+          </label>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= form.submit "Chamar rolê", class: "button", data: { action: "click->sheet#open" } %>
+  <% end %>
+</main>

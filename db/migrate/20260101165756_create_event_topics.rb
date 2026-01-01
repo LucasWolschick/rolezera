@@ -1,8 +1,9 @@
 class CreateEventTopics < ActiveRecord::Migration[8.1]
   def change
     create_table :event_topics do |t|
-      t.string :key
-      t.string :description
+      t.string :key, null: false
+      t.string :description, null: false
+      t.string :prompt, null: false
 
       t.timestamps
     end

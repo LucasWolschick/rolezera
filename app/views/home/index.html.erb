@@ -1,11 +1,31 @@
-<div class="home container">
+<div class="home container vertical">
   <h1>Olá, <%= Current.user.name %></h1>
 
-  <p>Você no momento não está com nenhum rolê ativo.</p>
+  <section class="home__event vertical">
+    <% if event = Event.get_for(Current.user) %>
+      <h2><%= event.event_topic.description %></h2>
 
-  <%= link_to "Amigos#{Current.user.friends_count > 0 ? " (#{Current.user.friends_count})" : ""}", friends_path, class: "anchor" %>
+      <small>Chamado às <%= event.created_at.in_time_zone.strftime("%Hh%M") %>, ativo até as <%= event.expires_at.in_time_zone.strftime("%Hh%M do dia %-d/%-m") %></small>
 
-  <%= link_to "Adicionar amigo", friends_add_path, class: "button" %>
+      <%= link_to "Ver rolê", events_path, class: "button" %>
+    <% else %>
+      <p>Você no momento não está com nenhum rolê ativo.</p>
+
+      <%= link_to "Chamar rolê", events_path, class: "button" %>
+    <% end %>
+  </section>
+
+  <section class="home__friends vertical">
+    <% if Current.user.friends_count > 0 %>
+      <h2>Amigos (<%= Current.user.friends_count %>)</h2>
+      <%= render "friends/friend_list", friends: Current.user.friends.sort_by(&:name).take(5) %>
+      <%= link_to "Ver todos", friends_path, class: "anchor" %>
+    <% else %>
+      <h2>Amigos</h2>
+      <small>Você ainda não adicionou nenhum amigo.</small>
+    <% end %>
+    <%= link_to "Adicionar amigo", friends_add_path, class: "button" %>
+  </section>
 
   <%= button_to "Sair", auth_path, method: :delete, class: "button--danger button" %>
 </div>
