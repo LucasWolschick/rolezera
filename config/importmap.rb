@@ -8,3 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 
 pin "qr-scanner", to: "qr-scanner/qr-scanner.min.js"
 pin "qr-scanner-worker", to: "qr-scanner/qr-scanner-worker.min.js"
+pin "push"

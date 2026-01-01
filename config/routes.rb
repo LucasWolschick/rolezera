@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  # PWA stuff for push notifications
+  # push notifications
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  post "push_subscriptions", to: "push_subscriptions#create"
+
+  post "/push_subscriptions", to: "push_subscriptions#subscribe"
+  post "/push_subscriptions/status", to: "push_subscriptions#status"
+  get "/push_subscriptions/cta", to: "push_subscriptions#cta"
 
   # landing page
   root to: "landing_page#index"

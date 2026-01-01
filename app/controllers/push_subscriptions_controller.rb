@@ -1,14 +1,25 @@
 class PushSubscriptionsController < ApplicationController
   skip_forgery_protection
 
-  def create
-    if subscription = Current.user.push_subscriptions.find_by(push_subscription_params)
-      subscription.touch
-    else
-      Current.user.push_subscriptions.create!(push_subscription_params.merge(user_agent: request.user_agent))
-    end
+  def cta
+    render "notifications/cta", layout: false
+  end
+
+  def subscribe
+    subscription = Current.user.push_subscriptions.find_or_initialize_by(
+      endpoint: push_subscription_params[:endpoint]
+    )
+
+    subscription.update!(
+      push_subscription_params.merge(user_agent: request.user_agent)
+    )
 
     head :ok
+  end
+
+  def status
+    exists = Current.user.push_subscriptions.exists?(endpoint: params[:endpoint])
+    head(exists ? :no_content : :not_found)
   end
 
   private
