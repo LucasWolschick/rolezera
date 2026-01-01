@@ -26,4 +26,9 @@ Rails.application.routes.draw do
       post ":token", to: "friend_invites#create"
     end
   end
+
+  # events
+  get "/events", to: "events#index"
+  post "/events", to: "events#new"
+  post "/events/confirm", to: "events#confirm"
 end

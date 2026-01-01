@@ -1,0 +1,21 @@
+.radio-list {
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 100%;
+}
+
+.radio-list li label {
+  display: block;
+
+  padding: 8px;
+
+  background: var(--neutral-bg);
+  
+  border-radius: 6px;
+
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 25%), -1px -1px 1px rgba(0, 0, 0, 6%);
+}
