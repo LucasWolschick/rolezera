@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
+  has_many :events, dependent: :destroy
+
   def friends
     super.readonly
   end
