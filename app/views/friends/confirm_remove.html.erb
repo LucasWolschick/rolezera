@@ -1,0 +1,10 @@
+<turbo-frame id="bottom_sheet">
+
+<main class="vertical center-contents" style="text-align: center">
+  <h2>Tem certeza que deseja remover <%= @user.name %> da sua lista de amigos?</h2>
+
+  <%= button_to "Sim, remover", friend_path(@user.id), method: :delete, data: { turbo: false }, class: "button button--danger" %>
+  <%= link_to "Cancelar", friend_path(@user.id), class: "anchor" %>
+</main>
+
+</turbo-frame>

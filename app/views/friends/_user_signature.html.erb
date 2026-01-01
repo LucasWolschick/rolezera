@@ -1,7 +1,7 @@
 <address class="user-signature">
   <h2><%= user.name %></h2>
   <small><%= format_phone user.phone %></small>
-  <% if local_assigns.key?(:friends_since) %>
+  <% if local_assigns.key?(:friends_since) && friends_since != nil %>
   <small>Adicionado em <time datetime=<%= friends_since.iso8601 %>><%= friends_since.to_date.strftime("%d/%m/%Y") %></time></small>
   <% end%>
 </address>
