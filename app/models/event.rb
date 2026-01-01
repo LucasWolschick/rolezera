@@ -4,11 +4,23 @@ class Event < ApplicationRecord
 
   scope :active, -> { where("expires_at > ?", Time.current) }
 
+  after_commit :notify_friends, on: :create
+
   def self.create_for(inviter:, topic:)
     Event.create!(inviter: inviter, event_topic_id: topic.id, expires_at: Time.now + 30.minutes)
   end
 
   def self.get_for(user, inviter: user)
     active.where(inviter: user).first
+  end
+
+  def format_message
+    event_topic.prompt % { user_name: inviter.name }
+  end
+
+  def notify_friends
+    inviter.friends.each do |friend|
+      WebPushJob.perform_now(self, friend.push_subscriptions.last)
+    end
   end
 end
