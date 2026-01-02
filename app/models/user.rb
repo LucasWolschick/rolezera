@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
-  has_many :events, dependent: :destroy
+  has_many :events, dependent: :destroy, foreign_key: "inviter_id", class_name: "Event"
 
   has_many :push_subscriptions, dependent: :destroy
 

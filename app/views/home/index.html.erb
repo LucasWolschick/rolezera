@@ -9,7 +9,11 @@
 
       <%= link_to "Ver rolê", events_path, class: "button" %>
     <% else %>
-      <p>Você no momento não está com nenhum rolê ativo.</p>
+      <% if any_friend_with_event? %>
+        <p>Você no momento não está com nenhum rolê ativo, mas alguns amigos seus estão.</p>
+      <% else %>
+        <p>Você no momento não está com nenhum rolê ativo.</p>
+      <% end %>
 
       <%= link_to "Chamar rolê", events_path, class: "button" %>
     <% end %>
