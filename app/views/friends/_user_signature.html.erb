@@ -2,10 +2,10 @@
   <h2><%= user.name %></h2>
   
   <% if event = user.active_events.first %>
-    <div class="user-signature__event">
+    <blockquote class="user-signature__event">
       <p><%= event.event_topic.description %></p>
       <small>chamado às <%= event.created_at.in_time_zone.strftime("%Hh%M") %></small>
-    </div>
+    </blockquote>
   <% end %>
   
   <small><%= format_phone user.phone %></small>
