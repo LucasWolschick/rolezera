@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     body: JSON.stringify({ endpoint: sub?.endpoint })
   });
 
-  if (res.status === 204) return;
+  if (res.status !== 404) return;
 
   const frame = document.getElementById("bottom_sheet");
   frame.src = "/push_subscriptions/cta";
