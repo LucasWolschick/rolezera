@@ -3,14 +3,18 @@
 
   <section class="home__event vertical">
     <% if event = Event.get_for(Current.user) %>
-      <h2><%= event.event_topic.description %></h2>
+      <div class="vertical gap-16">
+        <h2><%= event.event_topic.description %></h2>
 
-      <small>Chamado às <%= event.created_at.in_time_zone.strftime("%Hh%M") %>, ativo até as <%= event.expires_at.in_time_zone.strftime("%Hh%M do dia %-d/%-m") %></small>
+        <small>Chamado às <%= event.created_at.in_time_zone.strftime("%Hh%M") %>, ativo até as <%= event.expires_at.in_time_zone.strftime("%Hh%M do dia %-d/%-m") %></small>
+      </div>
 
       <%= link_to "Ver rolê", events_path, class: "button" %>
+    <% elsif any_friend_with_event? %>
+      <p>Você no momento não está com nenhum rolê ativo, mas alguns amigos seus estão.</p>
+      <%= link_to "Chamar rolê", events_join_path, class: "button" %>
     <% else %>
       <p>Você no momento não está com nenhum rolê ativo.</p>
-
       <%= link_to "Chamar rolê", events_path, class: "button" %>
     <% end %>
   </section>
@@ -18,7 +22,7 @@
   <section class="home__friends vertical">
     <% if Current.user.friends_count > 0 %>
       <h2>Amigos (<%= Current.user.friends_count %>)</h2>
-      <%= render "friends/friend_list", friends: Current.user.friends.sort_by(&:name).take(5) %>
+      <%= render "friends/friend_list", friends: Current.user.ordered_friends.take(5) %>
       <%= link_to "Ver todos", friends_path, class: "anchor" %>
     <% else %>
       <h2>Amigos</h2>
