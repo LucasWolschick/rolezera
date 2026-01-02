@@ -16,6 +16,10 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
+  has_many :events, dependent: :destroy
+
+  has_many :push_subscriptions, dependent: :destroy
+
   def friends
     super.readonly
   end
@@ -34,5 +38,9 @@ class User < ApplicationRecord
       friendships.where(friend: other).destroy_all
       other.friendships.where(friend: self).destroy_all
     end
+  end
+
+  def whatsapp_link
+    "https://wa.me/#{phone}"
   end
 end

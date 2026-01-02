@@ -1,0 +1,4 @@
+blockquote {
+  background-color: var(--quote-bg);
+  padding: 16px;
+}

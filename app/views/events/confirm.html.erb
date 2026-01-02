@@ -1,0 +1,18 @@
+<turbo-frame id="bottom_sheet">
+
+<main class="vertical center-contents">
+  <h2>Chamar rolê?</h2>
+
+  <p><%= Current.user.friends_count != 1 ? "Seus #{Current.user.friends_count} amigos receberão" : "Seu amigo receberá" %> a seguinte notificação:</p>
+
+  <blockquote><%= format_topic(user: Current.user, event_topic: @topic) %></blockquote>
+
+  <%= form_with url: events_path, model: @event, data: { turbo: false } do |form| %>
+    <%= form.hidden_field :event_topic, value: @topic.key %>
+    <%= form.submit "Sim, chamar rolê", class: "button" %>
+  <% end %>
+  
+  <%= link_to "Cancelar", "#", data: { action: "sheet#close", turbo: false }, class: "anchor" %>
+</main>
+
+</turbo-frame>

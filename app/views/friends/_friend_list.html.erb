@@ -1,5 +1,5 @@
 <ul class="friend-list">
-<% @friends.sort_by(&:name).each do |friend| %>
+<% friends.sort_by(&:name).each do |friend| %>
   <li>
     <%= link_to friend_path(friend), data: {
       turbo_frame: "bottom_sheet",

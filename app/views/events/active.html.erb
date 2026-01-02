@@ -1,0 +1,11 @@
+<main class="vertical container">
+  <%= link_to "Voltar", home_path, class: "anchor" %>
+
+  <h1>Rolê ativo</h1>
+
+  <p>Você chamou um rolê às <%= @event.created_at.in_time_zone.strftime("%Hh%M") %>:</p>
+
+  <h2><%= @event.event_topic.description %></h2>
+
+  <small>O rolê ficará ativo até as <%= @event.expires_at.in_time_zone.strftime("%Hh%M do dia %-d/%-m") %>. Depois disso você poderá chamar outro rolê.</small>
+</main>

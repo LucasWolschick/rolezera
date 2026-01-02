@@ -1,0 +1,2 @@
+class EventTopic < ApplicationRecord
+end

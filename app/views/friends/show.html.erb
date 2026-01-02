@@ -4,7 +4,7 @@
   <%= render "user_signature", user: @user, friends_since: Current.user.friendships.where(friend: @user).first.created_at %>
 
   <div class="actions vertical center-contents gap-24">
-    <%= link_to "Abrir WhatsApp", whatsapp_link_for_user(@user), class: "button button--green", target: "_blank" %>
+    <%= link_to "Abrir WhatsApp", @user.whatsapp_link, class: "button button--green", target: "_blank" %>
     <%= link_to "Remover amizade", friends_confirm_remove_path(@user.id), class: "button button--danger" %>
   </div>
 
