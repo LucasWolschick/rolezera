@@ -1,0 +1,14 @@
+<main class="vertical container">
+  <%= link_to "Voltar", home_path, class: "anchor" %>
+
+  <h1>Seus amigos já querem sair</h1>
+
+  <p>Por que não mandar uma mensagem para essas pessoas?</p>
+
+  <%= render "friends/friend_list", friends: Current.user.ordered_friends.where(Arel.sql("events.id IS NOT NULL")).take(5) %>
+
+  <p>Quer chamar outro rolê mesmo assim?</p>
+
+  <%= link_to "Sim, chamar novo rolê", events_path, class: "button", style: "align-self: center" %>
+  <%= link_to "Cancelar", home_path, class: "anchor", style: "text-align: center; align-self: center" %>
+</main>
