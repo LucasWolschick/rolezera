@@ -19,7 +19,7 @@ class PushSubscriptionsController < ApplicationController
   end
 
   def status
-    if !Current.user
+    if !authenticated?
       return head :unauthorized
     end
 
