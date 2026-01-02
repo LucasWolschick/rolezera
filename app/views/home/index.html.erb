@@ -3,18 +3,18 @@
 
   <section class="home__event vertical">
     <% if event = Event.get_for(Current.user) %>
-      <h2><%= event.event_topic.description %></h2>
+      <div class="vertical gap-16">
+        <h2><%= event.event_topic.description %></h2>
 
-      <small>Chamado às <%= event.created_at.in_time_zone.strftime("%Hh%M") %>, ativo até as <%= event.expires_at.in_time_zone.strftime("%Hh%M do dia %-d/%-m") %></small>
+        <small>Chamado às <%= event.created_at.in_time_zone.strftime("%Hh%M") %>, ativo até as <%= event.expires_at.in_time_zone.strftime("%Hh%M do dia %-d/%-m") %></small>
+      </div>
 
       <%= link_to "Ver rolê", events_path, class: "button" %>
+    <% elsif any_friend_with_event? %>
+      <p>Você no momento não está com nenhum rolê ativo, mas alguns amigos seus estão.</p>
+      <%= link_to "Chamar rolê", events_join_path, class: "button" %>
     <% else %>
-      <% if any_friend_with_event? %>
-        <p>Você no momento não está com nenhum rolê ativo, mas alguns amigos seus estão.</p>
-      <% else %>
-        <p>Você no momento não está com nenhum rolê ativo.</p>
-      <% end %>
-
+      <p>Você no momento não está com nenhum rolê ativo.</p>
       <%= link_to "Chamar rolê", events_path, class: "button" %>
     <% end %>
   </section>

@@ -2,6 +2,9 @@ class FriendsController < ApplicationController
   def index
   end
 
+  def join
+  end
+
   def show
     @user = Current.user.friends.find(params[:id])
     render layout: false
