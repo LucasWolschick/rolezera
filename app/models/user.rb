@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships
 
   has_many :events, dependent: :destroy, foreign_key: "inviter_id", class_name: "Event"
+  has_many :active_events, -> { active }, class_name: "Event", foreign_key: :inviter_id
 
   has_many :push_subscriptions, dependent: :destroy
 
@@ -42,5 +43,9 @@ class User < ApplicationRecord
 
   def whatsapp_link
     "https://wa.me/#{phone}"
+  end
+
+  def ordered_friends
+    friends.left_joins(:active_events).order(Arel.sql("events.id IS NULL"), :name)
   end
 end
