@@ -6,7 +6,7 @@
   gap: 8px;
   
   font-style: normal;
-
+  width: 100%;
 }
 
 .user-signature__event {
@@ -15,4 +15,5 @@
   align-items: center;
   justify-content: center;
   gap: 0px;
+  width: 100%;
 }
