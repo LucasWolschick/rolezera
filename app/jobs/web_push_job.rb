@@ -24,7 +24,7 @@ class WebPushJob < ApplicationJob
           private_key: Rails.application.credentials.vapid.private_key
         })
       )
-    rescue WebPush::InvalidSubscription, WebPush::InvalidSubscription
+    rescue WebPush::InvalidSubscription, WebPush::ExpiredSubscription
       subscription.destroy
     end
   end

@@ -20,7 +20,9 @@ class Event < ApplicationRecord
 
   def notify_friends
     inviter.friends.each do |friend|
-      WebPushJob.perform_now(self, friend.push_subscriptions.last)
+      friend.push_subscriptions.each do |subscription|
+        WebPushJob.perform_later(self, subscription)
+      end
     end
   end
 end
