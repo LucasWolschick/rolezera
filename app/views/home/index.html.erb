@@ -22,7 +22,7 @@
   <section class="home__friends vertical">
     <% if Current.user.friends_count > 0 %>
       <h2>Amigos (<%= Current.user.friends_count %>)</h2>
-      <%= render "friends/friend_list", friends: Current.user.friends.sort_by(&:name).take(5) %>
+      <%= render "friends/friend_list", friends: Current.user.ordered_friends.take(5) %>
       <%= link_to "Ver todos", friends_path, class: "anchor" %>
     <% else %>
       <h2>Amigos</h2>
