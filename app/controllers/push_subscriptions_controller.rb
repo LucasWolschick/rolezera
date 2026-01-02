@@ -1,4 +1,5 @@
 class PushSubscriptionsController < ApplicationController
+  allow_unauthenticated_access only: [ :status ]
   skip_forgery_protection
 
   def cta
@@ -18,6 +19,10 @@ class PushSubscriptionsController < ApplicationController
   end
 
   def status
+    if !Current.user
+      return head :unauthorized
+    end
+
     exists = Current.user.push_subscriptions.exists?(endpoint: params[:endpoint])
     head(exists ? :no_content : :not_found)
   end
