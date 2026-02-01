@@ -8,4 +8,9 @@
   <h2><%= @event.event_topic.description %></h2>
 
   <small>O rolê ficará ativo até as <%= @event.expires_at.in_time_zone.strftime("%Hh%M do dia %-d/%-m") %>. Depois disso você poderá chamar outro rolê.</small>
+
+  <% unless Current.user.active_event.invited_all%>
+    <p>Você convidou:</p>
+    <%= render "friends/friend_list", friends: Current.user.active_event.invited %>
+  <% end %>
 </main>
