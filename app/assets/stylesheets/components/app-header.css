@@ -1,0 +1,13 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 414px;
+  height: 60px;
+  
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
