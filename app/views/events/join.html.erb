@@ -5,7 +5,7 @@
 
   <p>Por que não mandar uma mensagem para essas pessoas?</p>
 
-  <%= render "friends/friend_list", friends: Current.user.ordered_friends.where(Arel.sql("events.id IS NOT NULL")).take(5) %>
+  <%= render "friends/friend_list", friends: Current.user.ordered_friends.where(id: Current.user.visible_events.active.select(:inviter_id)).limit(5) %>
 
   <p>Quer chamar outro rolê mesmo assim?</p>
 

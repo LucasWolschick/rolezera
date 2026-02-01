@@ -53,7 +53,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @draft.publish
+    @draft.publish unless Current.user.active_event
     redirect_to events_path
   end
 
