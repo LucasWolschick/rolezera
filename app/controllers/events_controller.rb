@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_action :set_event_draft, except: [ :index ]
 
   def index
-    if @event = Event.get_for(Current.user)
+    if @event = Current.user.active_event
       render "active" and return
     end
 

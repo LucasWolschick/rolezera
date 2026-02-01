@@ -22,7 +22,11 @@ class EventDraft < ApplicationRecord
         expires_at: Time.now + 30.minutes
       )
 
-      unless invited_all
+      if invited_all
+        inviter.friends.each do |friend|
+          e.event_invites.create!(user: friend)
+        end
+      else
         event_draft_invites.find_each do |draft_invite|
           e.event_invites.create!(user: draft_invite.user)
         end
