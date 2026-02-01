@@ -23,6 +23,9 @@ class User < ApplicationRecord
 
   has_one :event_draft, dependent: :destroy, foreign_key: "inviter_id", class_name: "EventDraft"
 
+  has_many :event_invites
+  has_many :visible_events, through: :event_invites, source: :event
+
   def friends
     super.readonly
   end
@@ -48,6 +51,7 @@ class User < ApplicationRecord
   end
 
   def ordered_friends
-    friends.left_joins(:active_event).order(Arel.sql("events.id IS NULL"), :name)
+    visible_inviter_ids = visible_events.active.select(:inviter_id)
+    friends.order(Arel.sql("users.id IN (#{visible_inviter_ids.to_sql}) DESC"), :name)
   end
 end
