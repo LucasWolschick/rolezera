@@ -75,6 +75,18 @@ class EventsController < ApplicationController
   end
 
   def set_event_draft
-    @draft = EventDraft.find_or_create_by!(inviter: Current.user)
+    @draft = EventDraft.find_or_create_by!(inviter: Current.user) do |draft|
+      last_event = Current.user.events.order(created_at: :desc).first
+      next unless last_event
+
+      draft.event_topic = last_event.event_topic
+      draft.invited_all = last_event.invited_all
+
+      unless draft.invited_all
+        last_event.event_invites.find_each do |invite|
+          draft.event_draft_invites.build(user: invite.user)
+        end
+      end
+    end
   end
 end
