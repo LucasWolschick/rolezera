@@ -1,0 +1,74 @@
+<main class="vertical container events-invite">
+  <%= link_to "Voltar", events_path, class: "anchor" %>
+
+  <h1>Chamar rolê</h1>
+
+  <p>Quem você quer chamar?</p>
+
+  <%= form_with url: events_invite_path, method: :get, id: "invite_search_form", class: "hidden" do %>
+  <% end %>
+
+  <%= form_with class: "vertical" do |f| %>
+    <p><%= pluralize(@draft.invite_count, "pessoa convidada", plural: "pessoas convidadas") %></p>
+    
+    <%= f.label :invite_all do %>
+      <%= f.check_box :invite_all, checked: @draft.invited_all %>
+      Convidar todos
+    <% end%>
+
+    <% unless @draft.invited_all %>
+      <div class="search">
+        <%= text_field_tag :q, params[:q], form: "invite_search_form" %>
+
+        <button type="submit" form="invite_search_form">
+          <span aria-hidden="true">🔍</span>
+          <span class="sr-only">Pesquisar</span>
+        </button>
+      </div>
+
+      <% if @draft.invite_count > 0 %>
+        <div>
+          <small class="block">
+            Pessoas convidadas:
+          </small>
+
+          <ul class="user-list">
+            <% @draft.invited.each do |invited| %>
+              <li>
+                <label>
+                  <%= f.checkbox "invited_ids[]", { include_hidden: false, checked: true }, invited.id %>
+                  <%= invited.name %>
+                </label>
+              </li>
+            <% end%>
+          </ul>
+        </div>
+      <% end %>
+
+      <div>
+        <small class="block">
+          Amigos:
+        </small>
+
+        <% if @invitable.count == 0 %>
+          <small>Nenhum amigo encontrado.</small>
+        <% else %>
+          <ul class="user-list">
+            <% @invitable.each do |invitee| %>
+              <li>
+                <label>
+                  <%= f.checkbox "invitee_ids[]", { include_hidden: false }, invitee.id %>
+                  <%= invitee.name %>
+                </label>
+              </li>
+            <% end%>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%= button_to "Confirmar seleção", events_invite_path, class: "button" %>
+  <% end %>
+
+  <%= button_to "Chamar rolê", events_confirm_path, method: :get, data: { turbo_frame: "bottom_sheet", action: "click->sheet#open" }, class: "button" %>
+</main>

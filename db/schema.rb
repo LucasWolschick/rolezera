@@ -10,7 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_01_211052) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_01_175524) do
+  create_table "event_draft_invites", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "event_draft_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["event_draft_id", "user_id"], name: "index_event_draft_invites_on_event_draft_id_and_user_id", unique: true
+    t.index ["event_draft_id"], name: "index_event_draft_invites_on_event_draft_id"
+    t.index ["user_id"], name: "index_event_draft_invites_on_user_id"
+  end
+
+  create_table "event_drafts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "event_topic_id"
+    t.boolean "invited_all", default: false, null: false
+    t.integer "inviter_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_topic_id"], name: "index_event_drafts_on_event_topic_id"
+    t.index ["inviter_id"], name: "index_event_drafts_on_inviter_id", unique: true
+  end
+
+  create_table "event_invites", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "event_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["event_id", "user_id"], name: "index_event_invites_on_event_id_and_user_id", unique: true
+    t.index ["event_id"], name: "index_event_invites_on_event_id"
+    t.index ["user_id"], name: "index_event_invites_on_user_id"
+  end
+
   create_table "event_topics", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "description", null: false
@@ -24,6 +54,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_01_211052) do
     t.datetime "created_at", null: false
     t.integer "event_topic_id", null: false
     t.datetime "expires_at"
+    t.boolean "invited_all", default: true, null: false
     t.integer "inviter_id", null: false
     t.datetime "updated_at", null: false
     t.index ["event_topic_id"], name: "index_events_on_event_topic_id"
@@ -60,6 +91,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_01_211052) do
     t.datetime "updated_at", null: false
     t.string "user_agent"
     t.integer "user_id", null: false
+    t.index ["endpoint"], name: "index_push_subscriptions_on_endpoint", unique: true
     t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
   end
 
@@ -84,6 +116,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_01_211052) do
     t.index ["google_sub"], name: "index_users_on_google_sub", unique: true
   end
 
+  add_foreign_key "event_draft_invites", "event_drafts"
+  add_foreign_key "event_draft_invites", "users"
+  add_foreign_key "event_drafts", "event_topics"
+  add_foreign_key "event_drafts", "users", column: "inviter_id"
+  add_foreign_key "event_invites", "events"
+  add_foreign_key "event_invites", "users"
   add_foreign_key "events", "event_topics"
   add_foreign_key "events", "users", column: "inviter_id"
   add_foreign_key "friend_invites", "users", column: "inviter_id"

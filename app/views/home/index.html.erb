@@ -2,7 +2,7 @@
   <h1>Olá, <%= Current.user.name %></h1>
 
   <section class="home__event vertical">
-    <% if event = Event.get_for(Current.user) %>
+    <% if event = Current.user.active_event %>
       <div class="vertical gap-16">
         <h2><%= event.event_topic.description %></h2>
 

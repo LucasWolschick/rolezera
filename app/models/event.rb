@@ -6,20 +6,15 @@ class Event < ApplicationRecord
 
   after_commit :notify_friends, on: :create
 
-  def self.create_for(inviter:, topic:)
-    Event.create!(inviter: inviter, event_topic_id: topic.id, expires_at: Time.now + 30.minutes)
-  end
-
-  def self.get_for(user, inviter: user)
-    active.where(inviter: user).first
-  end
+  has_many :event_invites, dependent: :destroy
+  has_many :invited, through: :event_invites, source: :user
 
   def format_message
     event_topic.prompt % { user_name: inviter.name }
   end
 
   def notify_friends
-    inviter.friends.each do |friend|
+    invited.each do |friend|
       friend.push_subscriptions.each do |subscription|
         WebPushJob.perform_later(self, subscription)
       end
