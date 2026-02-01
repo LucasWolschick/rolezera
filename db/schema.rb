@@ -24,6 +24,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_01_175524) do
   create_table "event_drafts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "event_topic_id"
+    t.boolean "invited_all", default: false, null: false
     t.integer "inviter_id", null: false
     t.datetime "updated_at", null: false
     t.index ["event_topic_id"], name: "index_event_drafts_on_event_topic_id"
@@ -90,6 +91,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_01_175524) do
     t.datetime "updated_at", null: false
     t.string "user_agent"
     t.integer "user_id", null: false
+    t.index ["endpoint"], name: "index_push_subscriptions_on_endpoint", unique: true
     t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
   end
 
