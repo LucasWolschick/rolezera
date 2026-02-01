@@ -7,7 +7,7 @@
           action: "click->sheet#open"
         } do %>
         <%= friend.name %>
-        <% if event = friend.active_events.first %>
+        <% if event = friend.active_event %>
           <small><%= event.event_topic.description %></small>
         <% end %>
       <% end %>

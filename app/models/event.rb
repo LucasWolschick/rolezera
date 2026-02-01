@@ -7,14 +7,10 @@ class Event < ApplicationRecord
   after_commit :notify_friends, on: :create
 
   has_many :event_invites, dependent: :destroy
-  has_many :invited, through: :event_invites
+  has_many :invited, through: :event_invites, source: :user
 
-  def self.create_for(inviter:, topic:)
-    Event.create!(inviter: inviter, event_topic_id: topic.id, expires_at: Time.now + 30.minutes)
-  end
-
-  def self.get_for(user, inviter: user)
-    active.where(inviter: user).first
+  def self.get_for(inviter)
+    active.where(inviter: inviter).first
   end
 
   def format_message
