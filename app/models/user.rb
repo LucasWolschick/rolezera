@@ -21,6 +21,8 @@ class User < ApplicationRecord
 
   has_many :push_subscriptions, dependent: :destroy
 
+  has_one :event_draft, dependent: :destroy, foreign_key: "inviter_id", class_name: "EventDraft"
+
   def friends
     super.readonly
   end
