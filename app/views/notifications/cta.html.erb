@@ -1,0 +1,12 @@
+<turbo-frame id="bottom_sheet">
+
+
+<main class="vertical center-contents">
+  <h2>Ativar notificações</h2>
+  <p>O Rolezêra te avisa quando seus amigos chamam rolês.</p>
+  <p>Para isso, você precisa dar permissão para ativar notificações.</p>
+  <button id="enable-push" class="button">Ativar notificações</button>
+  <%= link_to "Pergunte novamente mais tarde", "#", data: { action: "click->sheet#close" }, onclick: "sessionStorage.setItem('push-cta-dismissed','1')", class: "anchor" %>
+</main>
+
+</turbo-frame>

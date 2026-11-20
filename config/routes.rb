@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  # push notifications
+  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+
+  post "/push_subscriptions", to: "push_subscriptions#subscribe"
+  post "/push_subscriptions/status", to: "push_subscriptions#status"
+  get "/push_subscriptions/cta", to: "push_subscriptions#cta"
+
   # landing page
   root to: "landing_page#index"
 
@@ -26,4 +34,9 @@ Rails.application.routes.draw do
       post ":token", to: "friend_invites#create"
     end
   end
+
+  # events
+  get "/events", to: "events#index"
+  post "/events", to: "events#new"
+  post "/events/confirm", to: "events#confirm"
 end
