@@ -1,0 +1,46 @@
+.button {
+  --button-fg: var(--neutral-fg);
+  --button-bg: var(--neutral-bg);
+
+  color: var(--button-fg);
+  background-color: var(--button-bg);
+  border: none;
+
+  width: 13rem;
+  min-height: 2.5rem;
+  cursor: pointer;
+
+  padding: 9px 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  appearance: none;
+  font-family: inherit;
+  font-size: inherit;
+
+  border-radius: 10000px;
+
+  filter: drop-shadow(-1px -1px 1px rgba(0, 0, 0, 6%)) drop-shadow(1px 1px 3px rgba(0, 0, 0, 25%));
+
+  transition: background-color 0.15s, filter 0.15s;
+
+  &:hover {
+    background-color: oklch(from var(--button-bg) l 40% h);
+  }
+
+  &:active {
+    background-color: oklch(from var(--button-bg) calc(l * 0.9) calc(c * 5) h);
+  }
+}
+
+.button--danger {
+  --button-fg: var(--danger-fg);
+  --button-bg: var(--danger-bg);
+}
+
+.button--green {
+  --button-fg: var(--green-fg);
+  --button-bg: var(--green-bg);
+}

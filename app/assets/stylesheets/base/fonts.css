@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  src: 
+    url('/cabin/Cabin-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  src:
+    url('/cabin/Cabin-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Galindo';
+  font-style: normal;
+  src:
+    url('/galindo/Galindo-Regular.ttf') format('truetype');
+}

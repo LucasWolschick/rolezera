@@ -1,0 +1,30 @@
+<main class="sign-up container">
+  <h2>Olá!</h2>
+
+  <p>Precisamos de mais alguns dados seus para que você possa se conectar aos seus amigos.</p>
+
+  <%= form_with model: @user, url: sign_up_index_path, scope: :user do |form| %>
+    <div class="form-group">
+      <small><%= form.label :email, "Seu endereço de email é:" %></small>
+      <%= form.email_field :email, disabled: true, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <small><%= form.label :name, "Como devemos te chamar?" %></small>
+      <%= form.text_field :name, placeholder: "Ex. Alex Rocha", class: "form-input", maxlength: 200 %>
+      <% if @user&.errors.where(:name).any? %>
+        <div class="field-error">Insira um nome.</div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <small><%= form.label :phone, "Qual é o seu número do WhatsApp (com DDD)?" %></small>
+      <%= form.telephone_field :phone, placeholder: "Ex. +55 11 90000-0000", class: "form-input" %>
+      <% if @user&.errors.where(:phone).any? %>
+        <div class="field-error">Insira um número de telefone válido com DDD.</div>
+      <% end %>
+    </div>
+
+    <%= form.submit "Criar conta", class: "button" %>
+  <% end %>
+</main>
