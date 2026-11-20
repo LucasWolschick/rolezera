@@ -1,8 +1,9 @@
-a.button {
+a {
   text-decoration: none;
+  color: var(--fg);
 }
 
-a:not(.button) {
+.anchor:not(.button) {
   color: var(--fg);
 
   text-decoration: 5% solid var(--fg) underline;

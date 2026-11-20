@@ -23,7 +23,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body style="height: 100vh">
+  <body style="height: 100vh" data-controller="sheet">
     <%= yield %>
+
+    <%= render "shared/bottom_sheet" %>
   </body>
 </html>
