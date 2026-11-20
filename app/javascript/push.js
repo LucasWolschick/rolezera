@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   frame.src = "/push_subscriptions/cta";
 
   const controller = document.querySelector('[data-controller="sheet"]').sheetController;
-  controller.dismissibleValue = false;
+  controller.nonDismissibleValue = true;
   controller.open();
 });
 

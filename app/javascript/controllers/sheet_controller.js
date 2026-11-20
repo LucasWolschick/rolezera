@@ -2,10 +2,10 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["panel", "backdrop"]
-  static values = { dismissible: Boolean };
+  static values = { nonDismissible: Boolean };
 
   connect() {
-    this.backdropTarget.addEventListener("click", () => this.dismissibleValue ? this.close() : true);
+    this.backdropTarget.addEventListener("click", () => this.nonDismissibleValue ? this.close() : true);
     this.element.sheetController = this;
   }
 
@@ -31,6 +31,6 @@ export default class extends Controller {
       this.backdropTarget.classList.add("hidden");
     }, 250);
 
-    this.dismissibleValue = true;
+    this.nonDismissibleValue = true;
   }
 }

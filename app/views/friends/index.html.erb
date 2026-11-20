@@ -5,7 +5,7 @@
 
   <small>Você tem <%= pluralize(Current.user.friends_count, "amigo adicionado", plural: "amigos adicionados") %>.</small>
 
-  <%= render "friend_list", friends: @friends %>
+  <%= render "friend_list", friends: Current.user.ordered_friends %>
 
   <%= link_to "Adicionar amigos", friends_add_path, class: "button" %>
 </main>

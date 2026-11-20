@@ -1,12 +1,16 @@
 <ul class="friend-list">
-<% friends.sort_by(&:name).each do |friend| %>
-  <li>
-    <%= link_to friend_path(friend), data: {
-      turbo_frame: "bottom_sheet",
-      action: "click->sheet#open"
-    } do %>
-      <%= friend.name %>
-    <% end %>
-  </li>
-<% end %>
+  <% friends.each do |friend| %>
+    <li>
+      <%= link_to friend_path(friend),
+        data: {
+          turbo_frame: "bottom_sheet",
+          action: "click->sheet#open"
+        } do %>
+        <%= friend.name %>
+        <% if event = friend.active_events.first %>
+          <small><%= event.event_topic.description %></small>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
 </ul>
