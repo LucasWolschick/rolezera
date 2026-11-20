@@ -34,3 +34,8 @@ small {
   overflow-wrap: anywhere;
   text-align: center;
 }
+
+.app-logo--mini {
+  max-width: 4ch;
+  font-size: 18px;
+}

@@ -36,8 +36,13 @@ Rails.application.routes.draw do
   end
 
   # events
-  get "/events", to: "events#index"
   get "/events/join", to: "events#join"
+
+  get "/events", to: "events#index"
+  post "/events/topic", to: "events#set_topic"
+  get "/events/invite", to: "events#invite"
+  post "/events/invite", to: "events#set_invites"
+  get "/events/confirm", to: "events#confirm"
+
   post "/events", to: "events#new"
-  post "/events/confirm", to: "events#confirm"
 end

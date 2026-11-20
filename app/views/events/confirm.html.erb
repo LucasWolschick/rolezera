@@ -1,18 +1,23 @@
 <turbo-frame id="bottom_sheet">
 
 <main class="vertical center-contents">
-  <h2>Chamar rolê?</h2>
-
-  <p><%= Current.user.friends_count != 1 ? "Seus #{Current.user.friends_count} amigos receberão" : "Seu amigo receberá" %> a seguinte notificação:</p>
-
-  <blockquote><%= format_topic(user: Current.user, event_topic: @topic) %></blockquote>
-
-  <%= form_with url: events_path, model: @event, data: { turbo: false } do |form| %>
-    <%= form.hidden_field :event_topic, value: @topic.key %>
-    <%= form.submit "Sim, chamar rolê", class: "button" %>
-  <% end %>
+  <% invite_count = @draft.invite_count %>
   
-  <%= link_to "Cancelar", "#", data: { action: "sheet#close", turbo: false }, class: "anchor" %>
+  <% if invite_count == 0 %>
+    <p>Selecione ao menos uma pessoa antes de chamar um rolê.</p>
+
+    <%= link_to "Voltar", "#", data: { action: "sheet#close", turbo: false }, class: "anchor" %>
+  <% else %>
+    <h2>Chamar rolê?</h2>
+
+    <p><%= invite_count != 1 ? "#{invite_count} amigos receberão" : "Seu amigo receberá" %> a seguinte notificação:</p>
+
+    <blockquote><%= format_topic(user: Current.user, event_topic: Current.user.event_draft.event_topic) %></blockquote>
+
+    <%= button_to "Sim, chamar rolê", events_path, data: { turbo: false }, class: "button" %>
+    
+    <%= link_to "Cancelar", "#", data: { action: "sheet#close", turbo: false }, class: "anchor" %>
+  <% end %>
 </main>
 
 </turbo-frame>
