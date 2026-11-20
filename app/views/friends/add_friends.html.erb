@@ -1,0 +1,13 @@
+<main class="vertical container">
+  <%= link_to "Voltar", home_path %>
+
+  <h1>Adicione amigos</h1>
+
+  <p>Para adicionar alguém à sua lista de amigos, escaneeie o QR code da pessoa.</p>
+
+  <%= link_to "Adicionar amigo", friends_scan_path, class: "button" %>
+
+  <p>Mostre o seu QR code para outros para que eles lhe adicionem como amigo(a).</p>
+
+  <%= link_to "Mostrar meu QR code", friends_code_path, class: "button" %>
+</main>

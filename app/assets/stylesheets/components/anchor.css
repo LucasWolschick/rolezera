@@ -1,0 +1,19 @@
+a.button {
+  text-decoration: none;
+}
+
+a:not(.button) {
+  color: var(--fg);
+
+  text-decoration: 5% solid var(--fg) underline;
+  text-underline-offset: 15%;
+  transition: text-decoration 100ms;
+
+  &:hover {
+    text-decoration-thickness: 7%;
+  }
+
+  &:active {
+    font-weight: 600;
+  }
+}

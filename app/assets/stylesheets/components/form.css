@@ -39,5 +39,5 @@
 
 .form-group .field-error {
   color: var(--danger-fg);
-  font-size: calc(7rem / 9);
+  font-size: 14px;
 }

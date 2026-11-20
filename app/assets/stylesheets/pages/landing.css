@@ -7,12 +7,12 @@
   justify-content: center;
   height: 100%;
 
-  gap: 3rem;
+  gap: 54px;
 }
 
 .landing__copy {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 18px;
 }
