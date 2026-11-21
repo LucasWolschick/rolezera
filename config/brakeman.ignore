@@ -1,0 +1,39 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "869d3fffc1cd4910bea7734ef63287517d838e0023bae61788ce65aceddb8d6f",
+      "check_name": "LinkToHref",
+      "message": "Potentially unsafe model attribute in `link_to` href",
+      "file": "app/views/friends/show.html.erb",
+      "line": 7,
+      "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to(\"Abrir WhatsApp\", Current.user.friends.find(params[:id]).whatsapp_link, :class => \"button button--green\", :target => \"_blank\")",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "FriendsController",
+          "method": "show",
+          "line": 10,
+          "file": "app/controllers/friends_controller.rb",
+          "rendered": {
+            "name": "friends/show",
+            "file": "app/views/friends/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "friends/show"
+      },
+      "user_input": "Current.user.friends.find(params[:id]).whatsapp_link",
+      "confidence": "Weak",
+      "cwe_id": [
+        79
+      ],
+      "note": "this is safe because its a simple concatenation of a validated field"
+    }
+  ],
+  "brakeman_version": "8.1.1"
+}
