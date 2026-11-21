@@ -11,6 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # for cross compilation
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
       - name: Set environment variables
         env:
           GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
