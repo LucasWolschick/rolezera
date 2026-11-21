@@ -34,7 +34,7 @@ jobs:
         uses: appleboy/ssh-action@v1
         env:
           USERNAME: ${{ env.USERNAME }}
-          GHCR_TOKEN: ${{ secrets.VPS_GHCR_TOKEN }}
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
