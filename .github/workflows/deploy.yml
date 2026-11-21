@@ -48,9 +48,18 @@ jobs:
               --password-stdin
             
             podman pull "ghcr.io/$USERNAME/rolezera:latest"
-            
+
+            # apply migrations
+            podman run --rm \
+              --env-file ~/.rails-env \
+              -v rails-data:/rails/storage \
+              "ghcr.io/$USERNAME/rolezera:latest" \
+              bin/rails db:migrate
+
+            # start new version of the app
             podman stop rails || true
             podman rm rails || true
+            
             podman run -d \
               --name rails \
               --restart unless-stopped \
