@@ -13,7 +13,7 @@ jobs:
 
       - name: Set environment variables
         run:
-          echo "USERNAME=${{ secrets.GHCR_USERNAME }}" | tr -y '[:upper:]' '[:lower:]' >> $GITHUB_ENV
+          echo "USERNAME=${{ secrets.GHCR_USERNAME }}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_ENV
 
       - name: Login to GHCR
         run: |
