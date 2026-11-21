@@ -11,18 +11,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set environment variables
+        run:
+          echo "USERNAME=${{ secrets.GHCR_USERNAME }}" | tr -y '[:upper:]' '[:lower:]' >> $GITHUB_ENV
+
       - name: Login to GHCR
         run: |
           echo "${{ secrets.GHCR_TOKEN }}" | \
-          podman login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
+          podman login ghcr.io -u "$USERNAME" --password-stdin
 
       - name: Build image
         run: |
-          podman build -t "ghcr.io/${{ secrets.GHCR_USERNAME }}/rolezera:latest" .
+          podman build -t "ghcr.io/$USERNAME/rolezera:latest" .
 
       - name: Push image
         run: |
-          podman push "ghcr.io/${{ secrets.GHCR_USERNAME }}/rolezera:latest"
+          podman push "ghcr.io/$USERNAME/rolezera:latest"
 
       - name: Deploy on VPS
         uses: appleboy/ssh-action@v1
@@ -31,11 +35,11 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            podman pull "ghcr.io/${{ secrets.GHCR_USERNAME }}/rolezera:latest"
+            podman pull "ghcr.io/$USERNAME/rolezera:latest"
             podman stop rails || true
             podman rm rails || true
             podman run -d \
               --name rails \
               -p 3000:3000 \
               --env-file ~/.rails-env \
-              "ghcr.io/${{ secrets.GHCR_USERNAME }}/rolezera:latest"
+              "ghcr.io/$USERNAME/rolezera:latest"
